@@ -29,10 +29,13 @@ Or directly in your template:
 Few screenshots (not all available options):
 
 #1
-![Screenshot 1](screenshots/screenshot1.png)
+
+![Screenshot 1](https://github.com/ecarlotti/meteor-autoform-scheduler/blob/master/screenshots/screnshot1.png)
 
 #2
-![Screenshot 2](screenshots/screenshot2.png)
+
+![Screenshot 2](https://github.com/ecarlotti/meteor-autoform-scheduler/blob/master/screenshots/screnshot2.png)
 
 #3
-![Screenshot 3](screenshots/screenshot3.png)
+
+![Screenshot 3](https://github.com/ecarlotti/meteor-autoform-scheduler/blob/master/screenshots/screnshot1.png)
