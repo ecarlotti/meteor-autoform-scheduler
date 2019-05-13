@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 var makeOption = function (value, label, data) {
     var option = {};
@@ -91,8 +91,8 @@ var getLabel = _.partial(getField, 'label');
 var getValue = _.partial(getField, 'value');
 var getData = _.partial(getField, 'data');
 
-AutoForm.addInputType('universe-scheduler', {
-    template: 'afUniverseScheduler',
+AutoForm.addInputType('scheduler', {
+    template: 'afScheduler',
     valueOut: function () {
         return this.val();
     }/*,
@@ -106,7 +106,7 @@ AutoForm.addInputType('universe-scheduler', {
     }*/
 });
 
-Template.afUniverseScheduler.onCreated(function () { //eslint-disable-line complexity
+Template.afScheduler.onCreated(function () { //eslint-disable-line complexity
     var defaultLabel;
 
     var options = this.data.value || '';
@@ -236,7 +236,7 @@ Template.afUniverseScheduler.onCreated(function () { //eslint-disable-line compl
     }
 });
 
-Template.afUniverseScheduler.onRendered(function () {
+Template.afScheduler.onRendered(function () {
     var self = this;
 
     this.autorun(function () {
@@ -289,7 +289,7 @@ Template.registerHelper('emptyObject', function () {
     return {};
 });
 
-Template.afUniverseScheduler.helpers({
+Template.afScheduler.helpers({
     getRRule: function () {
         return Template.instance().rrule.get().options;
     },
@@ -435,7 +435,7 @@ Template.afUniverseScheduler.helpers({
     }
 });
 
-Template.afUniverseScheduler.events({
+Template.afScheduler.events({
     'click #js-freq li': function (event, template) {
         var rrule = template.rrule.get();
 

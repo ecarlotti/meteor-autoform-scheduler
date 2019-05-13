@@ -3,12 +3,12 @@
 }
 
 @media (min-width: 768px) {
-	.universe-autoform-scheduler .control-label {
+	.autoform-scheduler .control-label {
 		padding-top: 7px;
 		margin-bottom: 0;
 	}
 
-	.universe-autoform-scheduler .form-inline .control-label {
+	.autoform-scheduler .form-inline .control-label {
 		padding-top: 0px;
 		margin-bottom: 0;
 	}

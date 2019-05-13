@@ -1,17 +1,38 @@
-<h1 align="center">
-    <a href="https://github.com/vazco">vazco</a>/Universe Autoform Scheduler
-</h1>
+This package is currently unsupported (in some way), but I'll try to make up some documentation. If something is wrong, please let me know. If everything will be all right, then I'll copy it to the README.
 
-&nbsp;
+#Description
+This field uses (and stores in db) as a [RRule](https://github.com/aramk/rrule/). Basically, if you want to start using it, go with RRule.fromString(string) (where string is the output from this field) and then use it as described [here](https://github.com/aramk/rrule/#occurrence-retrieval-methods).
 
-<h3 align="center">
-  -- Abandonware. This package is deprecated! --
-</h3>
+#Usage
+In your schema:
 
-&nbsp;
+```javascript
+new SimpleSchema({
+    // ...
+    schedule: {
+        type: String,
+        autoform: {
+            type: 'universe-scheduler'
+        }
+    }
+    // ...
+});
+```
+Or directly in your template:
 
-### License
+```javascript
+{{!-- ... --}}
+{{> afQuickField name="schedule" type="universe-scheduler"}}
+{{!-- ... --}}
+```
 
-<img src="https://vazco.eu/banner.png" align="right">
+Few screenshots (not all available options):
 
-**Like every package maintained by [Vazco](https://vazco.eu/), Universe Autoform Scheduler is [MIT licensed](https://github.com/vazco/uniforms/blob/master/LICENSE).**
+#1
+![Screenshot 1](screenshots/screenshot1.png)
+
+#2
+![Screenshot 2](screenshots/screenshot2.png)
+
+#3
+![Screenshot 3](screenshots/screenshot3.png)

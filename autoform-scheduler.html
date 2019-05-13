@@ -1,11 +1,11 @@
-<template name="afUniverseScheduler">
-    <div class="universe-autoform-scheduler">
+<template name="afScheduler">
+    <div class="autoform-scheduler">
         <input type="hidden" value="{{value}}" {{atts}}>
 
         {{#with getRRule}}
             <div class="form-inline">
                 {{#with value=getDtstart atts=emptyObject id="js-dtstart"}}
-                    {{> afUniverseBootstrapDatepicker}}
+                    {{> afSchedulerBootstrapDatepicker}}
                 {{/with}}
                 <span class="help-block"></span>
             </div>
@@ -17,7 +17,7 @@
 
                 <div class="col-sm-11">
                     <div class="form-inline">
-                        {{> afUniverseSchedulerDropdown options=freqOptions id="js-freq" value=freq label=getFreqLabel}}
+                        {{> afSchedulerDropdown options=freqOptions id="js-freq" value=freq label=getFreqLabel}}
 
                         {{#if getFreqText}}
                                 <label class="control-label">every</label>
@@ -53,15 +53,15 @@
                                 <input type="radio" name="monthlyRadio" value="bymonthday" checked={{isState 'monthlyState' 'bymonthday'}}>
                                 on day
 
-                                {{> afUniverseSchedulerDropdown options=bymonthdayOptions id="js-bymonthday" value=getBymonthdayValue label=getBymonthdayValue}}
+                                {{> afSchedulerDropdown options=bymonthdayOptions id="js-bymonthday" value=getBymonthdayValue label=getBymonthdayValue}}
                             </div>
 
                             <div class="col-sm-12">
                                 <input type="radio" name="monthlyRadio" value="bysetpos" checked={{isState 'monthlyState' 'bysetposByweekday'}}>
                                 on the
-                                {{> afUniverseSchedulerDropdown options=bysetposOptions id="js-bysetpos" value=getBysetposValue label=getBysetposLabel}}
+                                {{> afSchedulerDropdown options=bysetposOptions id="js-bysetpos" value=getBysetposValue label=getBysetposLabel}}
 
-                                {{> afUniverseSchedulerDropdown options=bysetposBydayOptions id="js-bysetpos-byday" value=getBysetposBydayValue label=getBysetposBydayLabel}}
+                                {{> afSchedulerDropdown options=bysetposBydayOptions id="js-bysetpos-byday" value=getBysetposBydayValue label=getBysetposBydayLabel}}
                             </div>
                         </div>
                     {{/if}}
@@ -71,22 +71,22 @@
                             <div class="col-sm-12 form-group">
                                 <input type="radio" name="yearlyRadio" value="bymonthday" checked={{isState 'yearlyState' 'bymonthBymonthday'}}>
                                 on
-                                {{> afUniverseSchedulerDropdown options=monthsOptions id="js-bymonth-bymonthday" label=getBymonthdayBymonthLabel}}
+                                {{> afSchedulerDropdown options=monthsOptions id="js-bymonth-bymonthday" label=getBymonthdayBymonthLabel}}
 
-                                {{> afUniverseSchedulerDropdown options=bymonthdayOptions id="js-yearly-bymonthday" label=getBymonthdayLabel}}
+                                {{> afSchedulerDropdown options=bymonthdayOptions id="js-yearly-bymonthday" label=getBymonthdayLabel}}
 
                             </div>
 
                             <div class="col-sm-12">
                                 <input type="radio" name="yearlyRadio" value="bysetpos" checked={{isState 'yearlyState' 'bysetposByweekdayBymonth'}}>
                                 on the
-                                {{> afUniverseSchedulerDropdown options=bysetposOptions id="js-yearly-bysetpos" label=getYearlyBysetposLabel}}
+                                {{> afSchedulerDropdown options=bysetposOptions id="js-yearly-bysetpos" label=getYearlyBysetposLabel}}
 
-                                {{> afUniverseSchedulerDropdown options=bysetposBydayOptions id="js-yearly-byweekday" label=getYearlyByweekdayLabel}}
+                                {{> afSchedulerDropdown options=bysetposBydayOptions id="js-yearly-byweekday" label=getYearlyByweekdayLabel}}
 
                                 of
 
-                                {{> afUniverseSchedulerDropdown options=monthsOptions id="js-bysetpos-bymonth" label=getBysetposBymonthLabel}}
+                                {{> afSchedulerDropdown options=monthsOptions id="js-bysetpos-bymonth" label=getBysetposBymonthLabel}}
                             </div>
                         </div>
                     {{/if}}
@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="col-sm-11 form-inline">
-                        {{> afUniverseSchedulerDropdown options=endOptions id="js-end" label=getEndLabel}}
+                        {{> afSchedulerDropdown options=endOptions id="js-end" label=getEndLabel}}
 
                         {{#if eq getEndValue "COUNT"}}
                             <input type="number" class="form-control css-js-3-digits" name="count" min="1" value={{getCount}} />
@@ -109,7 +109,7 @@
 
                         {{#if eq getEndValue "UNTIL"}}
                             {{#with value=getUntil atts=emptyObject id="js-until"}}
-                                {{> afUniverseBootstrapDatepicker}}
+                                {{> afSchedulerBootstrapDatepicker}}
                             {{/with}}
                         {{/if}}
                     </div>
@@ -120,7 +120,7 @@
     </div>
 </template>
 
-<template name="afUniverseSchedulerDropdown">
+<template name="afSchedulerDropdown">
     <div class="btn-group">
         <button type="button" class="btn btn-default {{atts}}" data-selected-value="{{value}}">
             {{label}}
