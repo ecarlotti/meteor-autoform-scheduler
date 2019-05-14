@@ -12,7 +12,7 @@ new SimpleSchema({
     schedule: {
         type: String,
         autoform: {
-            type: 'universe-scheduler'
+            type: 'scheduler'
         }
     }
     // ...

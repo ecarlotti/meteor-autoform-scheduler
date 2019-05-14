@@ -431,7 +431,9 @@ Template.afScheduler.helpers({
     //     return isNoneSet(options);
     // },
     isState: function (type, desiredState) {
-        return Template.instance()[type].get() === desiredState;
+        if (Template.instance()[type]) {
+            return Template.instance()[type].get() === desiredState;
+        }
     }
 });
 
