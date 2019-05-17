@@ -3,7 +3,7 @@
 Package.describe({
     name: 'ecarlotti:meteor-autoform-scheduler',
     summary: 'Custom "afScheduler" input type for AutoForm',
-    version: '0.1.2',
+    version: '0.2.2',
     git: 'https://github.com/ecarlotti/meteor-autoform-scheduler.git'
 });
 
@@ -21,6 +21,7 @@ Package.onUse(function (api) {
     api.use('vazco:universe-utilities@1.0.7');
     api.use('reactive-dict');                               // @1.1.0
     api.use('aramk:rrule@2.1.0');                           // @2.1.0
+    api.use("tap:i18n");                                              // https://atmospherejs.com/tap/i18n
 
     api.addFiles([
         'autoform-scheduler.html',

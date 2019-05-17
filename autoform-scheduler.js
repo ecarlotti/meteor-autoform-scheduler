@@ -1,77 +1,104 @@
 // 'use strict';
 
+function translate(data) {
+
+    if (TAPi18n) {
+        var _txt_ = (data.text ? data.text : data);
+        var _key_ = "common/afScheduler/lbl-" + _txt_;
+        var _tt_  = TAPi18n.__(_key_);
+
+        if (_tt_ === _key_) {
+            return data;
+        } else {
+            if (data.text) {
+                return {text: _tt_};
+            } else {
+                return _tt_;
+            }
+        }
+    } else {
+        return data;
+    }
+
+}
+
 var makeOption = function (value, label, data) {
     var option = {};
 
     option.value = value;
 
     if (label) {
-        option.label = label;
+        option.label = translate(label);
     } else {
         option.label = value;
     }
 
     if (data) {
-        option.data = data;
+        option.data = translate(data);
     }
 
     return option;
 };
 
-var freqOptionsMap = [
-    // BUGGY
-    // makeOption('NONE', 'None (run once)'),
-    makeOption('HOURLY', 'Hourly', {text: 'hour(s)'}),
-    makeOption('DAILY', 'Daily', {text: 'day(s)'}),
-    makeOption('WEEKDAYS', 'Weekdays'),
-    makeOption('WEEKLY', 'Weekly', {text: 'week(s)'}),
-    makeOption('MONTHLY', 'Monthly'),
-    makeOption('YEARLY', 'Yearly')
-];
+var freqOptionsMap, bysetposOptions, bysetposBydayOptions, monthsOptions, endOptions;
 
-var bysetposOptions = [
-    makeOption(1, 'First'),
-    makeOption(2, 'Second'),
-    makeOption(3, 'Third'),
-    makeOption(4, 'Fourth'),
-    makeOption(-1, 'Last')
-];
+initOptions = function() {
+    freqOptionsMap = [
+        // BUGGY
+        // makeOption('NONE', 'None (run once)'),
+        makeOption('HOURLY', 'Hourly', {text: 'hour(s)'}),
+        makeOption('DAILY', 'Daily', {text: 'day(s)'}),
+        makeOption('WEEKDAYS', 'Weekdays'),
+        makeOption('WEEKLY', 'Weekly', {text: 'week(s)'}),
+        makeOption('MONTHLY', 'Monthly'),
+        makeOption('YEARLY', 'Yearly')
+    ];
 
-var bysetposBydayOptions = [
-    makeOption('MO', 'Monday'),
-    makeOption('TU', 'Tuesday'),
-    makeOption('WE', 'Wednesday'),
-    makeOption('TH', 'Thursday'),
-    makeOption('FR', 'Friday'),
-    makeOption('SA', 'Saturday'),
-    makeOption('SU', 'Sunday'),
-    makeOption('MO,TU,WE,TH,FR,SA,SU', 'Day'),
-    makeOption('MO,TU,WE,TH,FR', 'Weekday'),
-    makeOption('SA,SU', 'Weekend day')
-];
+    bysetposOptions = [
+        makeOption(1, 'First'),
+        makeOption(2, 'Second'),
+        makeOption(3, 'Third'),
+        makeOption(4, 'Fourth'),
+        makeOption(-1, 'Last')
+    ];
 
-var monthsOptions = [
-    makeOption(1, 'January'),
-    makeOption(2, 'February'),
-    makeOption(3, 'March'),
-    makeOption(4, 'April'),
-    makeOption(5, 'May'),
-    makeOption(6, 'June'),
-    makeOption(7, 'July'),
-    makeOption(8, 'August'),
-    makeOption(9, 'September'),
-    makeOption(10, 'October'),
-    makeOption(11, 'November'),
-    makeOption(12, 'December')
-];
+    bysetposBydayOptions = [
+        makeOption('MO', 'Monday'),
+        makeOption('TU', 'Tuesday'),
+        makeOption('WE', 'Wednesday'),
+        makeOption('TH', 'Thursday'),
+        makeOption('FR', 'Friday'),
+        makeOption('SA', 'Saturday'),
+        makeOption('SU', 'Sunday'),
+        makeOption('MO,TU,WE,TH,FR,SA,SU', 'Day'),
+        makeOption('MO,TU,WE,TH,FR', 'Weekday'),
+        makeOption('SA,SU', 'Weekend day')
+    ];
 
-var endOptions = [
-    makeOption('never', 'Never'),
-    makeOption('COUNT', 'After'),
-    makeOption('UNTIL', 'On date')
-];
+    monthsOptions = [
+        makeOption(1, 'January'),
+        makeOption(2, 'February'),
+        makeOption(3, 'March'),
+        makeOption(4, 'April'),
+        makeOption(5, 'May'),
+        makeOption(6, 'June'),
+        makeOption(7, 'July'),
+        makeOption(8, 'August'),
+        makeOption(9, 'September'),
+        makeOption(10, 'October'),
+        makeOption(11, 'November'),
+        makeOption(12, 'December')
+    ];
 
-var weekdaysArr = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+    endOptions = [
+        makeOption('never', 'Never'),
+        makeOption('COUNT', 'After'),
+        makeOption('UNTIL', 'On date')
+    ];
+};
+
+// var weekdaysArr = (TAPi18n ? TAPi18n.__("common/afScheduler/lbl-weekdaysArr").split("\n") : ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU']);
+var weekdaysArr = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];   // Used in RRule, cannot be translated
 
 var getField = function (fieldName, value, optionsArr) {
     var result;
@@ -108,6 +135,11 @@ AutoForm.addInputType('scheduler', {
 
 Template.afScheduler.onCreated(function () { //eslint-disable-line complexity
     var defaultLabel;
+
+    // Init the current locale on the MomentJS library
+    var lang = (TAPi18n ? TAPi18n.getLanguage() : 'en');
+    moment.locale(lang);
+    initOptions();
 
     var options = this.data.value || '';
     var rrule = this.rrule = new RRule(RRule.parseString(options));
@@ -252,6 +284,7 @@ Template.afScheduler.onRendered(function () {
 var formatDate = function (date) {
     date = ensureMoment(date);
 
+    // return date.format( TAPi18n.__("common/shortdatetimeformat") );
     return date.format('MM/DD/YYYY hh:mm A');
 };
 
@@ -290,6 +323,25 @@ Template.registerHelper('emptyObject', function () {
 });
 
 Template.afScheduler.helpers({
+    atts: function() {
+        return _.omit(this.atts, ['datePickerOptions', 'datetimePickerOptions']);
+    }, 
+    datetimePickerOptions: function() {
+        var instance = Template.instance();
+        if (instance.data && instance.data.atts && instance.data.atts.datetimePickerOptions) {
+            return instance.data.atts.datetimePickerOptions;
+        } else {
+            return {};  // emptyObject
+        }
+    },
+    datePickerOptions: function() {
+        var instance = Template.instance();
+        if (instance.data && instance.data.atts && instance.data.atts.datePickerOptions) {
+            return instance.data.atts.datePickerOptions;
+        } else {
+            return {};  // emptyObject
+        }
+    },
     getRRule: function () {
         return Template.instance().rrule.get().options;
     },
@@ -570,7 +622,11 @@ Template.afScheduler.events({
             rrule.options.bysetpos = yearlyBysetpos;
             rrule.options.byweekday = [RRule[yearlyBysetposByweekday]];
 
-            template.yearlyState.set('bysetposByweekdayBymonth');
+            if (template.yearlyState) {
+                template.yearlyState.set('bysetposByweekdayBymonth');
+            } else {
+                template.yearlyState = new ReactiveVar('bysetposByweekdayBymonth');
+            }
         } else {
             rrule.options.bymonthday = [yearlyBymonthday];
             rrule.options.bymonth = yearlyBymonthdayBymonth;
@@ -578,7 +634,11 @@ Template.afScheduler.events({
             rrule.options.bysetpos = null;
             rrule.options.byweekday = [];
 
-            template.yearlyState.set('bymonthBymonthday');
+            if (template.yearlyState) {
+                template.yearlyState.set('bymonthBymonthday');
+            } else {
+                template.yearlyState = new ReactiveVar('bymonthBymonthday');
+            }
         }
 
         template.rrule.set(rrule);
@@ -744,7 +804,7 @@ var mapByweekdayToString = function (arr) {
 
     if (arr) {
         value = arr.map(function (el) {
-            if (el.weekday) {
+            if (typeof(el.weekday) !== 'undefined') {
                 return weekdaysArr[el.weekday];
             }
 

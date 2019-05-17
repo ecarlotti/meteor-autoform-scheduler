@@ -1,6 +1,3 @@
-.datepicker.datepicker-dropdown {
-	z-index: 1200 !important;
-}
 
 @media (min-width: 768px) {
 	.autoform-scheduler .control-label {
