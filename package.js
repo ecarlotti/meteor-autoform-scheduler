@@ -19,7 +19,7 @@ Package.onUse(function (api) {
     api.use('vazco:universe-utilities@1.0.7');
     api.use('reactive-dict');                               // @1.1.0
     api.use('aramk:rrule@2.1.0');                           // @2.1.0
-    api.use("tap:i18n");                                              // https://atmospherejs.com/tap/i18n
+    api.use("tap:i18n@1.8.2");                              // https://atmospherejs.com/tap/i18n
 
     api.addFiles([
         'lib/bootstrap3-datetimepicker/css/bootstrap-datetimepicker.css',   // from tsega:bootstrap3-datetimepicker
