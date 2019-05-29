@@ -283,9 +283,7 @@ Template.afScheduler.onRendered(function () {
 
 var formatDate = function (date) {
     date = ensureMoment(date);
-
-    // return date.format( TAPi18n.__("common/shortdatetimeformat") );
-    return date.format('MM/DD/YYYY hh:mm A');
+    return date.format('L LT');
 };
 
 var ensureMoment = function (date) {

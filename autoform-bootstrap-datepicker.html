@@ -1,9 +1,8 @@
 <template name="afSchedulerBootstrapDatepicker">
-    {{#if atts.buttonClasses}}
-        <div class="input-group date">
-            <input type="text" value="" {{atts}} /><span class="input-group-addon"><i class="{{atts.buttonClasses}}" id="{{id}}"></i></span>
-        </div>
-    {{else}}
-        <input type="text" value="" {{atts}} id="{{id}}" />
-    {{/if}}
+    <div class="input-group date m-b-xs" id="{{id}}">
+        <input type="text" class="form-control" {{atts}} />
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
 </template>

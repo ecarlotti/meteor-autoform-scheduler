@@ -4,7 +4,7 @@
 
         {{#with getRRule}}
             <div class="row form-inline m-b-md m-t-sm">
-                    <div class="col-sm-2 text-right no-padding">
+                    <div class="col-sm-2 text-right no-padding m-t-xs">
                         <label class="control-label">{{_ "common/afScheduler/Start"}}</label>
                     </div>
                     <div class="col-sm-10">
@@ -113,7 +113,7 @@
                         {{/if}}
 
                         {{#if eq getEndValue "UNTIL"}}
-                            {{#with value=getUntil atts=datePickerOptions id="js-until"}}
+                            {{#with value=getUntil atts=datetimePickerOptions id="js-until"}}
                                 {{> afSchedulerBootstrapDatepicker}}
                             {{/with}}
                         {{/if}}
