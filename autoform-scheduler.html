@@ -39,14 +39,13 @@
                         <div class="row" style="margin-left:0px;">
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <fieldset class="btn-group" data-toggle="buttons">
+                                    <div data-toggle="buttons-checkbox" class="btn-group">
                                         {{#each weeklyOptions}}
-                                            <label class="btn btn-default js-weekly-option {{#if hasWeekday}}active{{/if}}">
-                                                <input type="checkbox" data-value="{{value}}" checked={{hasWeekday}}>
-                                                {{label}}
-                                            </label>
+                                            <button class="btn btn-default js-weekly-option {{#if hasWeekday}}active{{/if}}" data-value="{{value}}" type="button">
+                                                {{#if hasWeekday}}<i class="fa fa-check"></i> {{/if}}{{label}}
+                                            </button>
                                         {{/each}}
-                                    </fieldset>
+                                    </div>
                                 </div>
                             </div>
                         </div>

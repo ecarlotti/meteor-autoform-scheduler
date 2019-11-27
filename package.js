@@ -3,7 +3,7 @@
 Package.describe({
     name: 'ecarlotti:meteor-autoform-scheduler',
     summary: 'Custom "afScheduler" input type for AutoForm',
-    version: '0.2.4',
+    version: '0.2.5',
     git: 'https://github.com/ecarlotti/meteor-autoform-scheduler.git'
 });
 

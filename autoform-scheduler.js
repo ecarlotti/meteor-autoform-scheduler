@@ -279,6 +279,7 @@ Template.afScheduler.onRendered(function () {
         // console.log(self.rruleString.get());
         self.$('[data-schema-key]').val(self.rruleString.get());
     });
+
 });
 
 var formatDate = function (date) {
@@ -489,6 +490,8 @@ Template.afScheduler.helpers({
 
 Template.afScheduler.events({
     'click #js-freq li': function (event, template) {
+        event.preventDefault();
+
         var rrule = template.rrule.get();
 
         // BUGGY
@@ -523,7 +526,7 @@ Template.afScheduler.events({
             template.freqText.set(null);
         }
     },
-    'change .js-weekly-option': function (event, template) {
+    'click .js-weekly-option': function (event, template) {
         //active class is added some time after this callback
         //therefore logic is somewhat reversed -
         //$actives won't catch just checked option
@@ -532,10 +535,10 @@ Template.afScheduler.events({
         // "".split(separator) returns [""]
         var activeValues = weeklyWeekdays.length > 0 ? weeklyWeekdays.split(',') : [];
 
-        if ($(event.target).prop('checked')) {
-            activeValues.push(this.value);
-        } else {
+        if (activeValues.includes(this.value)) {
             activeValues = _.without(activeValues, this.value);
+        } else {
+            activeValues.push(this.value);
         }
 
         var rrule = template.rrule.get();
@@ -955,3 +958,7 @@ var assignProperties = function (rrule, template) {
     return rrule;
 };
 
+Template.afSchedulerDropdown.onRendered(function() {
+    // Initialize the dropdown toggle controls on Bootstrap
+    $('.dropdown-toggle').dropdown();
+});
